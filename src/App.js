@@ -1,25 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import {
+  SandpackCodeEditor,
+  SandpackFileExplorer,
+  SandpackLayout,
+  SandpackPreview,
+  SandpackProvider
+} from "@codesandbox/sandpack-react";
+import { nightOwl } from "@codesandbox/sandpack-themes";
 
-function App() {
+const App = () => {
+  const files = {}
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <SandpackProvider
+      files={files} 
+      theme="light" 
+      template="react"
+      theme={nightOwl}
+      options={{
+        classes: {
+          "sp-wrapper": "custom-wrapper",
+          "sp-layout": "custom-layout",
+          "sp-tab-button": "custom-tab"
+        },
+      }}
+    >
+      <SandpackLayout>
+        <SandpackFileExplorer />
+        <SandpackCodeEditor closableTabs showTabs />
+        <SandpackPreview />
+      </SandpackLayout>
+    </SandpackProvider>
+  )  
 }
 
-export default App;
+export default App
